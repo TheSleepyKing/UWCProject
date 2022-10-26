@@ -1,0 +1,8 @@
+Monobit Test Results: (0.3359238131517358, True)
+Cumalative Sum Results Reverse: (1.0271459103014091, True)
+Cumalative Sum Results: (0.49562815748617484, True)
+Linear Complexity Test Results: (-1.0, False)
+Random Execursion Test Results: [('-4', -4, 0.2857142857142857, 0.9979031595107858, True), ('-3', -3, 0.4, 0.9953295932358704, True), ('-2', -2, 0.6666666666666666, 0.984747879018509, True), ('-1', -1, 1.0, 0.9625657732472964, True), ('+1', 1, 1.0, 0.9625657732472964, True), ('+2', 2, 6.666666666666667, 0.24663415218605245, True), ('+3', 3, 16.599999999999998, 0.005324337409375595, False), ('+4', 4, 30.571428571428573, 1.138085401980086e-05, False)]
+Approximate Entropy Test Results: (1.0, True)
+Run test Results: (0.9882222181111506, True)
+Serial Test Result:((0.4989610874592239, True), (0.49853075529672125, True))
