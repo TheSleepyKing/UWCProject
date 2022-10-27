@@ -36,6 +36,44 @@ def deleteFig(figg_agg1,figg_agg2,figg_agg3):
         test.delete_figure_agg(figg_agg1)
         test.delete_figure_agg(figg_agg2)
         test.delete_figure_agg(figg_agg3)
+
+def encrypt(key):
+        shortened_key =key[:len(message)]
+        print(shortened_key)
+        message_encoded=''
+        # chr(ord(m)+2*ord(k)%256)
+        for m,k in zip(message,shortened_key):
+            cipher_encode = ord(m)^ord(k)
+            message_data = cipher_encode
+            message_encoded += chr(message_data)
+        return message_encoded, shortened_key
+
+def decrypt(shortened_key, name):
+    result =''
+    for m,k in zip(shortened_key, name):
+        cipher_encode = ord(m)^ord(k)
+        message_data = cipher_encode
+        result += chr(message_data)
+    return result
+
+def augment_message_length(message):
+    """
+    In order to restrict the key from generating a pattern , mainly if the key is
+    shorter than the message , it would be easier to decrypt by enemies, since they
+    key will use part of its own more than once generating a pattern 
+    In this function , before we generate the key we intialize the key to be 
+    3x greater.
+    """
+    #intialize size of key
+    messageLength = len(message)*3
+    #break up message into smaller parts if length >10
+    messageLengthList= []
+    for i in range(int(messageLength/10)):
+        messageLengthList.append(10)
+    if messageLength%10 != 0:
+        messageLengthList.append(messageLength%10)
+
+    return messageLength
 while True:
 # Start GUI
     """
@@ -52,29 +90,13 @@ while True:
     elif event == 'Add':
         message = values['INPUT']
         #intialize size of key
-        messageLength = len(message)*3
-        #break up message into smaller parts if length >10
-        messageLengthList= []
-        for i in range(int(messageLength/10)):
-            messageLengthList.append(10)
-        if messageLength%10 != 0:
-            messageLengthList.append(messageLength%10)
+        messageLength = augment_message_length(message)
     elif event=='PRNG':
         count+ 1
-        key = randomKeys.psuedo_key(messageLength)
-        key_length = len(key)
-        shortened_key =key[:len(message)]
-        print(shortened_key)
-        message_encoded=''
-        # chr(ord(m)+2*ord(k)%256)
-        for m,k in zip(message,shortened_key):
-            cipher_encode = ord(m)^ord(k)
-            message_data = cipher_encode
-            message_encoded += chr(message_data)
-            
-            name = message_encoded
-            window['OUTPUT'].update(value=name)   
-            window['KEY'].update(key) 
+        key = randomKeys.psuedo_key(messageLength)            
+        name, shortened_key = encrypt(key)
+        window['OUTPUT'].update(value=name)   
+        window['KEY'].update(key) 
         print(name)
         randomwalk = test.randomwalktest(key)
         figg_agg1 = test.draw_figure(window['-CANVAS-'].TKCanvas, test.randwalktestVisual(randomwalk))
@@ -121,27 +143,13 @@ while True:
         message = values["-IN-"]
         if message.endswith(".txt"):
             message = randomKeys.text_conversion(message)
-            print(message)
-        messageLength = len(message)*3
-        messageLengthList= []
-        for i in range(int(messageLength/10)):
-            messageLengthList.append(10)
-        if messageLength%10 != 0:
-            messageLengthList.append(messageLength%10)  
+        messageLength = augment_message_length(message)
         print(messageLength)   
     elif event=='1':
         key = randomKeys.Quantum_key(messageLength,1)
-        shortened_key =key[:len(message)]
-        message_encoded=''
-        # plot_histogram(counts)
-        # print(counts)
-        for m,k in zip(message,shortened_key):
-            cipher_encode = ord(m)^ord(k)
-            message_data = cipher_encode
-            message_encoded += chr(message_data) 
-            name = message_encoded
-            window['OUTPUT'].update(value=name)
-            window['KEY'].update(key)
+        name, shortened_key = encrypt(key)
+        window['OUTPUT'].update(value=name)
+        window['KEY'].update(key)
         if values["-IN10-"]:
             todayDate = dateTime.strftime("%d-%m-%Y_%H-%M-%S")
             g = open("QRNG_H1_NIST_RESULTS_" + todayDate+".txt","x")
@@ -181,15 +189,9 @@ while True:
     elif event=='3':
         count+ 1
         key = randomKeys.Quantum_key(messageLength,3)
-        shortened_key =key[:len(message)]
-        message_encoded=''
-        for m,k in zip(message,shortened_key):
-            cipher_encode = ord(m)^ord(k)
-            message_data = cipher_encode
-            message_encoded += chr(message_data)
-            name = message_encoded
-            window['OUTPUT'].update(value=name)
-            window['KEY'].update(key)
+        name, shortened_key = encrypt(key)
+        window['OUTPUT'].update(value=name)
+        window['KEY'].update(key)
         randomwalk = test.randomwalktest(key)
         figg_agg1 = test.draw_figure(window['-CANVAS-'].TKCanvas, test.randwalktestVisual(randomwalk))
         digitsFrequency = test.digitsfrequencytest(key)
@@ -229,15 +231,9 @@ while True:
     elif event=='5':
         count+ 1
         key = randomKeys.Quantum_key(messageLength,5)
-        shortened_key =key[:len(message)]
-        message_encoded=''
-        for m,k in zip(message,shortened_key):
-            cipher_encode = ord(m)^ord(k)
-            message_data = cipher_encode
-            message_encoded += chr(message_data)
-            name = message_encoded
-            window['OUTPUT'].update(value=name)
-            window['KEY'].update(key)
+        name, shortened_key = encrypt(key)
+        window['OUTPUT'].update(value=name)
+        window['KEY'].update(key)
         randomwalk = test.randomwalktest(key)
         figg_agg1 = test.draw_figure(window['-CANVAS-'].TKCanvas, test.randwalktestVisual(randomwalk))
         digitsFrequency = test.digitsfrequencytest(key)
@@ -276,15 +272,9 @@ while True:
     elif event=='7':
         count+ 1
         key = randomKeys.Quantum_key(messageLength,7)
-        shortened_key =key[:len(message)]
-        message_encoded=''
-        for m,k in zip(message,shortened_key):
-            cipher_encode = ord(m)^ord(k)
-            message_data = cipher_encode
-            message_encoded += chr(message_data)
-            name = message_encoded
-            window['OUTPUT'].update(value=name)
-            window['KEY'].update(key)
+        name, shortened_key = encrypt(key)
+        window['OUTPUT'].update(value=name)
+        window['KEY'].update(key)
         randomwalk = test.randomwalktest(key)
         figg_agg1 = test.draw_figure(window['-CANVAS-'].TKCanvas, test.randwalktestVisual(randomwalk))
         digitsFrequency = test.digitsfrequencytest(key)
@@ -321,12 +311,7 @@ while True:
             f.close()
 
     elif event == "Decrypt":
-        result =''
-        for m,k in zip(shortened_key, message_encoded):
-            cipher_encode = ord(m)^ord(k)
-            message_data = cipher_encode
-            result += chr(message_data)
-        name = result
+        name = decrypt(shortened_key, name)
         print(name)
         window['OUTPUT'].update(value=name)
 
