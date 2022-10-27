@@ -31,6 +31,11 @@ count = 0
 figg_agg1 = FigureCanvasTkAgg()
 figg_agg2 = FigureCanvasTkAgg()
 figg_agg3 = FigureCanvasTkAgg()
+
+def deleteFig(figg_agg1,figg_agg2,figg_agg3):
+        test.delete_figure_agg(figg_agg1)
+        test.delete_figure_agg(figg_agg2)
+        test.delete_figure_agg(figg_agg3)
 while True:
 # Start GUI
     """
@@ -326,9 +331,7 @@ while True:
         window['OUTPUT'].update(value=name)
 
     elif event =="Clear":
-        test.delete_figure_agg(figg_agg1)
-        test.delete_figure_agg(figg_agg2)
-        test.delete_figure_agg(figg_agg3)
+        deleteFig(figg_agg1,figg_agg2,figg_agg3)
 
 window.close()
 
