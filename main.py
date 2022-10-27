@@ -27,7 +27,6 @@ layout = [
 ]
 screenWidth, screenHeight = sg.Window.get_screen_size()
 window = sg.Window("One Time Pad Application", layout)
-event, values = window.read()
 count = 0
 figg_agg1 = FigureCanvasTkAgg()
 figg_agg2 = FigureCanvasTkAgg()
