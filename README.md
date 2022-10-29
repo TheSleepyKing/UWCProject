@@ -3,7 +3,7 @@
 Quantum computers will eventually become more readily available and by the end of the 2020- decade 
 they would be able to break through most classical cryptography. Random number generators are at the 
 core of such a cryptographic system, there is an effort to build new quantum-resistant cryptography that 
-would be resilient to both classical and quantum computers. This project aims to implement and perform a 
+would be resilient to both classical and quantum computers. This project implements and perform a 
 comparative analysis of classical and quantum algorithms for random number generators for use in quantum-resistant cryptography.
 
 ## Getting Started
