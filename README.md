@@ -17,9 +17,9 @@ pip3 install qiskit, numpy, scipy ,matplotlib,PySimpleGUI
 ```
 
 ### How to use:
-* You can start the program using your IDE feature (like run) to run main.py or 
+* You can start the program using your IDE feature (like run) to run main.py or in terminal 
 ```
-    python3 main.py in terminal 
+    python3 main.py
 ```
 * User Interface
 ![User Interface Screenshot](https://github.com/CS-UWC/Quantum-safe-cryptograph-Quantum-random-number-generator-/blob/main/UI.PNG)
